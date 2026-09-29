@@ -1,0 +1,24 @@
+{
+  "build": "node build.mjs",
+  "output": "dist",
+  "headers": [
+    { "source": "/assets/(.*)", "headers": { "Cache-Control": "public, max-age=31536000, immutable" } },
+    {
+      "source": "/(.*)",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "DENY",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+        "Strict-Transport-Security": "max-age=63072000; includeSubDomains"
+      }
+    }
+  ],
+  "redirects": [
+    { "source": "/old-pricing", "destination": "/pricing", "permanent": true },
+    { "source": "/blog/:slug", "destination": "/posts/:slug", "permanent": false },
+    { "source": "/go/(.*)", "destination": "/$1", "permanent": false },
+    { "source": "/echo/(.*)", "destination": "/echo/$1", "permanent": false },
+    { "source": "/:path+/", "destination": "/:path+", "permanent": true }
+  ]
+}
